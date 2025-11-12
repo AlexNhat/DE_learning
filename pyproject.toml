@@ -13,6 +13,7 @@ dependencies = [
     "numpy==1.26.4",       # Numpy stable version for Python 3.11
     "pandas==2.2.3",       # Stable pandas version compatible with Python 3.11
     "pyarrow==12.0.0",     # Arrow/Parquet support
+    "polars (>=1.35.2,<2.0.0)",
 ]
 
 [build-system]
