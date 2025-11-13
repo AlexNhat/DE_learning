@@ -4,127 +4,134 @@ import pandas as pd
 import polars as pl
 import pyarrow as pa
 import pyarrow.dataset as ds
-import os
-import yaml
-from pathlib import Path
-from typing import Union, Optional, Dict, Any
+from typing import Union, Optional
 from multiprocessing import cpu_count
-from config import *
+from config import DuckDBConfig
 
 
 class DuckDBConnection:
     """
-    DuckDB Connection SIÊU MẠNH – truyền thẳng df, polars, arrow vào __init__
-    Tự động register + optimize config + hỗ trợ dev/prod
+    DuckDBConnection – lightweight and flexible wrapper around DuckDB.
+    Supports registering pandas, polars, and Arrow datasets directly.
+    Automatically applies configuration and provides context manager support.
     """
 
     def __init__(
-        self,
-        db_path: str = ":memory:",
-        config_path: str = "config/duckdb.yaml",
-        env: Optional[str] = None,
-        # TRUYỀN DATA NGAY TẠI ĐÂY
-        pandas_df: Optional[pd.DataFrame] = None,
-        polars_df: Optional[pl.DataFrame] = None,
-        arrow_table: Optional[pa.Table] = None,
-        arrow_dataset: Optional[ds.Dataset] = None,
-        **named_data: Any,  # Ví dụ: sales=my_pdf, users=pl_df
+        self, db_path: str = ":memory:", config: Optional[DuckDBConfig] = None
     ):
         self.db_path = db_path
-        self.env = (env or os.getenv("ENV", "dev")).lower()
-        self.con = duckdb.connect(database=db_path, read_only=False)
-        self._load_and_apply_config(config_path)
-        print(f"DuckDB Connected: {db_path} | Mode: {self.env.upper()}")
+        self.config = config or DuckDBConfig()
+        self.con = None
 
-        # TỰ ĐỘNG REGISTER TẤT CẢ DATA TRUYỀN VÀO
-        self._auto_register(pandas_df, "pandas_df")
-        self._auto_register(polars_df, "polars_df")
-        self._auto_register(arrow_table, "arrow_table")
-        self._auto_register(arrow_dataset, "arrow_dataset")
-
-        # Register các named_data (sales=df, users=pl_df, ...)
-        for name, data in named_data.items():
-            self._auto_register(data, name)
-
-    def _load_and_apply_config(self, config_path: str):
-        cfg_file = Path(__file__).parent.parent / config_path
-        if cfg_file.exists():
-            with open(cfg_file) as f:
-                full_cfg = yaml.safe_load(f)
-                cfg = full_cfg.get(self.env, full_cfg.get("dev", {}))
-        else:
-            cfg = {}
-
-        threads = cfg.get("threads", 8 if self.env == "dev" else 0)
-        if threads == 0:
-            threads = cpu_count()
-        self.con.execute(f"SET threads = {threads};")
-        self.con.execute(
-            f"SET memory_limit = '{cfg.get('memory_limit', '4GB' if self.env == 'dev' else '80%')}';"
-        )
-        self.con.execute(
-            f"SET enable_external_access = {cfg.get('enable_external_access', True if self.env == 'dev' else False)};"
-        )
-        self.con.execute(
-            f"SET preserve_insertion_order = {cfg.get('preserve_insertion_order', True if self.env == 'dev' else False)};"
-        )
-        self.con.execute(
-            f"SET enable_progress_bar = {cfg.get('enable_progress_bar', True if self.env == 'dev' else False)};"
-        )
-
-        temp_dir = cfg.get("temp_directory", "/tmp/duckdb_tmp")
-        os.makedirs(temp_dir, exist_ok=True)
-        self.con.execute(f"SET temp_directory = '{temp_dir}';")
-
-        self.con.execute("SET enable_object_cache = true;")
-        self.con.execute("SET parquet_metadata_cache = true;")
-
-    def _auto_register(self, data: Any, default_name: str):
-        """Tự động register + đặt tên thông minh"""
-        if data is None:
-            return
-
-        # Tạo tên table an toàn
-        import re
-
-        safe_name = re.sub(r"\W|^(?=\d)", "_", default_name)
-
-        # Xóa table cũ nếu có
         try:
-            self.con.execute(f"DROP TABLE IF EXISTS {safe_name}")
-        except:
-            pass
+            # Validate and initialize configuration
+            self.config.validate()
+            duckdb.query(
+                f"SET python_enable_replacements = {self.config.python_enable_replacements}"
+            )
 
-        # Register theo kiểu dữ liệu
-        if isinstance(data, (pd.DataFrame, pl.DataFrame, pa.Table, ds.Dataset)):
-            if isinstance(data, pl.DataFrame):
-                data = data.to_arrow()
-            self.con.register(safe_name, data)
-            rows = self.con.execute(f"SELECT COUNT(*) FROM {safe_name}").fetchone()[0]
-            print(f"REGISTERED → {safe_name} ({rows:,} rows)")
-        else:
-            try:
-                self.con.register(safe_name, data)
-                print(f"REGISTERED → {safe_name}")
-            except Exception as e:
-                print(f"Không register được {safe_name}: {e}")
+            # Establish connection
+            self.con = duckdb.connect(database=self.db_path)
+            self._apply_config()
+        except Exception as e:
+            raise RuntimeError(f"Failed to initialize DuckDBConnection: {e}")
 
-    # Các method tiện ích
+    # -----------------------------
+    # Table Management
+    # -----------------------------
+    def add(
+        self, name: str, data: Union[pd.DataFrame, pl.DataFrame, pa.Table, ds.Dataset]
+    ):
+        """Register a pandas/polars/Arrow dataset as a DuckDB table."""
+        try:
+            if isinstance(data, pd.DataFrame):
+                self.con.register(name, data)
+            elif isinstance(data, pl.DataFrame):
+                self.con.register(name, data.to_pandas())
+            elif isinstance(data, pa.Table):
+                self.con.register(name, data.to_pandas())
+            elif isinstance(data, ds.Dataset):
+                self.con.register(name, data.to_table().to_pandas())
+            else:
+                raise TypeError(f"Unsupported data type: {type(data)}.")
+        except Exception as e:
+            raise RuntimeError(f"Error registering table '{name}': {e}")
+
+    def remove(self, name: str):
+        """Unregister a table from DuckDB."""
+        try:
+            self.con.unregister(name)
+        except Exception as e:
+            raise RuntimeError(f"Error removing table '{name}': {e}")
+
+    # -----------------------------
+    # Query Execution
+    # -----------------------------
     def query(self, sql: str, **params) -> pd.DataFrame:
-        return self.con.execute(sql, params).fetchdf()
+        """Execute SQL query and return a pandas DataFrame."""
+        try:
+            if params:
+                return self.con.execute(query=sql, params=params).fetchdf()
+            return self.con.execute(query=sql).fetchdf()
+        except Exception as e:
+            raise RuntimeError(f"Query execution failed: {sql}\nDetails: {e}")
 
     def pl(self, sql: str, **params) -> pl.DataFrame:
-        return self.con.execute(sql, params).pl()
+        """Execute SQL query and return a Polars DataFrame."""
+        try:
+            if params:
+                return self.con.execute(query=sql, params=params).pl()
+            return self.con.execute(query=sql).pl()
+        except Exception as e:
+            raise RuntimeError(f"Polars query execution failed: {sql}\nDetails: {e}")
 
-    def arrow(self, sql: str, **params) -> pa.Table:
-        return self.con.execute(sql, params).arrow()
+    # -----------------------------
+    # Configuration
+    # -----------------------------
+    def _apply_config(self):
+        """Apply DuckDB configuration settings."""
+        try:
+            cfg = self.config.to_dict()
+            if cfg["threads"] == 0:
+                cfg["threads"] = cpu_count()
 
+            # Apply core configuration parameters
+            self.con.execute(f"SET threads = {cfg['threads']};")
+            self.con.execute(f"SET memory_limit = '{cfg['memory_limit']}';")
+            self.con.execute(
+                f"SET enable_external_access = {cfg['enable_external_access']};"
+            )
+            self.con.execute(
+                f"SET preserve_insertion_order = {cfg['preserve_insertion_order']};"
+            )
+            self.con.execute(f"SET enable_progress_bar = {cfg['enable_progress_bar']};")
+
+            # Recommended DuckDB performance options
+            self.con.execute("SET enable_object_cache = true;")
+            self.con.execute("SET parquet_metadata_cache = true;")
+
+        except Exception as e:
+            raise RuntimeError(f"Failed to apply DuckDB configuration: {e}")
+
+    # -----------------------------
+    # Connection Management
+    # -----------------------------
     def close(self):
-        self.con.close()
-        print("DuckDB connection closed.")
+        """Close the DuckDB connection."""
+        try:
+            if self.con:
+                self.con.close()
+                self.con = None
+        except Exception as e:
+            raise RuntimeError(f"Failed to close DuckDB connection: {e}")
 
+    # -----------------------------
+    # Context Manager
+    # -----------------------------
     def __enter__(self):
+        """Support 'with' context management."""
         return self
 
-    def __exit__(self, *args):
+    def __exit__(self, exc_type, exc_value, traceback):
+        """Automatically close connection when exiting context."""
         self.close()
