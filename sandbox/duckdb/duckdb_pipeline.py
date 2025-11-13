@@ -1,9 +1,9 @@
 # src/de_pipeline.py
 from typing import Optional, List, Callable, Any
-from duckdb_class import DuckDBConnection
+from sandbox.duckdb.duckdb_class import DuckDBConnection
 
 
-class DuckDBPipeline:
+class DuckPipeline:
     """
     Flexible DEPipeline for DuckDB with custom Python transforms.
 

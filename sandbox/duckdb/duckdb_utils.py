@@ -1,4 +1,4 @@
-from random_data.generate_data import generate_data
+from sandbox.duckdb.random_data.generate_data import generate_data
 import duckdb
 
 

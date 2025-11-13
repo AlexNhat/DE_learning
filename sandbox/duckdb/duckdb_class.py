@@ -6,7 +6,7 @@ import pyarrow as pa
 import pyarrow.dataset as ds
 from typing import Union, Optional
 from multiprocessing import cpu_count
-from config import DuckDBConfig
+from sandbox.duckdb.config import DuckDBConfig
 
 
 class DuckDBConnection:

@@ -16,6 +16,11 @@ dependencies = [
     "polars (>=1.35.2,<2.0.0)",
 ]
 
+[tool.poetry]
+packages = [
+    { include = "sandbox" }
+]
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
