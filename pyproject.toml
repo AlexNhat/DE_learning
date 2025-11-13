@@ -21,6 +21,11 @@ packages = [
     { include = "sandbox" }
 ]
 
+[tool.poetry.group.dev.dependencies]
+jupyterlab = "^4.3"
+ipykernel = ">=7.0,<8.0"
+pytest = "^7.4"       
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
