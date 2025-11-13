@@ -1,0 +1,15 @@
+product,tier,total_orders,total_qty,total_revenue,big_orders_count,customer_segment
+Monitor,Standard,8,50,43074.14,4,DIAMOND
+Laptop,Basic,14,87,37642.47,1,DIAMOND
+Tablet,Standard,6,31,28238.76,2,PLATINUM
+Laptop,Standard,5,31,27680.81,4,PLATINUM
+Monitor,Basic,13,67,26994.88,0,PLATINUM
+Phone,Standard,5,28,24659.35,2,PLATINUM
+Phone,Basic,8,38,22406.12,1,PLATINUM
+Tablet,Basic,14,64,21446.35,0,PLATINUM
+Keyboard,Standard,6,25,20573.26,2,PLATINUM
+Keyboard,Basic,9,44,20535.87,2,PLATINUM
+Monitor,Premium,4,17,17703.44,1,GOLD
+Keyboard,Premium,3,15,16249.57,1,GOLD
+Phone,Premium,4,13,13987.27,1,GOLD
+Laptop,Premium,1,6,6550.02,1,GOLD

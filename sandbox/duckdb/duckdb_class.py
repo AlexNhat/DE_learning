@@ -7,51 +7,55 @@ import pyarrow.dataset as ds
 from typing import Union, Optional
 from multiprocessing import cpu_count
 from sandbox.duckdb.config import DuckDBConfig
+from sandbox.duckdb.duckdb_functions import DuckDBFunctions
 
 
 class DuckDBConnection:
-    """
-    DuckDBConnection – lightweight and flexible wrapper around DuckDB.
-    Supports registering pandas, polars, and Arrow datasets directly.
-    Automatically applies configuration and provides context manager support.
-    """
-
     def __init__(
         self, db_path: str = ":memory:", config: Optional[DuckDBConfig] = None
     ):
         self.db_path = db_path
         self.config = config or DuckDBConfig()
-        self.con = None
 
+        self.con = None
+        duckdb.query(
+            f"set python_enable_replacements={self.config.python_enable_replacements}"
+        )
         try:
-            # Validate and initialize configuration
+            # Validate config
             self.config.validate()
-            duckdb.query(
-                f"SET python_enable_replacements = {self.config.python_enable_replacements}"
-            )
+
+            # Pre-connect settings
+            pre_connect_options = []
+            if self.config.enable_external_access:
+                pre_connect_options.append("enable_external_access=True")
+
+            connect_args = {}
+            # For in-memory, external access not needed
+            if self.db_path != ":memory:":
+                # DuckDB doesn't accept enable_external_access via connect args, so must set via PRAGMA before any table creation
+                pass
 
             # Establish connection
-            self.con = duckdb.connect(database=self.db_path)
+            self.con = duckdb.connect(database=self.db_path, **connect_args)
+            self.functions = DuckDBFunctions(self.con)
+
+            # Runtime settings
             self._apply_config()
+
         except Exception as e:
             raise RuntimeError(f"Failed to initialize DuckDBConnection: {e}")
 
     # -----------------------------
     # Table Management
     # -----------------------------
-    def add(
-        self, name: str, data: Union[pd.DataFrame, pl.DataFrame, pa.Table, ds.Dataset]
-    ):
+    def add(self, name: str, data: Union[pd.DataFrame, pl.DataFrame]):
         """Register a pandas/polars/Arrow dataset as a DuckDB table."""
         try:
             if isinstance(data, pd.DataFrame):
                 self.con.register(name, data)
             elif isinstance(data, pl.DataFrame):
                 self.con.register(name, data.to_pandas())
-            elif isinstance(data, pa.Table):
-                self.con.register(name, data.to_pandas())
-            elif isinstance(data, ds.Dataset):
-                self.con.register(name, data.to_table().to_pandas())
             else:
                 raise TypeError(f"Unsupported data type: {type(data)}.")
         except Exception as e:
@@ -99,9 +103,6 @@ class DuckDBConnection:
             self.con.execute(f"SET threads = {cfg['threads']};")
             self.con.execute(f"SET memory_limit = '{cfg['memory_limit']}';")
             self.con.execute(
-                f"SET enable_external_access = {cfg['enable_external_access']};"
-            )
-            self.con.execute(
                 f"SET preserve_insertion_order = {cfg['preserve_insertion_order']};"
             )
             self.con.execute(f"SET enable_progress_bar = {cfg['enable_progress_bar']};")
@@ -135,3 +136,6 @@ class DuckDBConnection:
     def __exit__(self, exc_type, exc_value, traceback):
         """Automatically close connection when exiting context."""
         self.close()
+
+
+# A = DuckDBConnection()
