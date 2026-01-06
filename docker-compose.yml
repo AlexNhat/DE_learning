@@ -1,0 +1,105 @@
+services:
+    mssql:
+        build:
+            context: ./docker/mssql
+            dockerfile: Dockerfile
+            platforms:
+                - "linux/amd64"
+            tags:
+                - "de/mssql:1.0.0"
+
+        container_name: de_mssql
+
+        environment:
+            MSSQL_PORT: ${MSSQL_PORT}
+
+            MSSQL_USER_NAME: ${MSSQL_USER_NAME}
+            MSSQL_USER_PASSWORD: ${MSSQL_USER_PASSWORD}
+
+            SQLCMDPASSWORD: ${MSSQL_SA_PASSWORD}
+            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+
+            MSSQL_PID: ${MSSQL_PID}
+            MSSQL_RELEASE_YEAR: ${MSSQL_RELEASE_YEAR}
+
+            ACCEPT_EULA: ${ACCEPT_EULA}
+            TRUST_SERVER_CERTIFICATE: ${TRUST_SERVER_CERTIFICATE}
+            ENCRYPT: ${ENCRYPT}
+
+            INIT_NORTHWIND: ${INIT_NORTHWIND-true}
+
+        networks:
+            - de
+
+        ports:
+            - "${MSSQL_PORT}:${MSSQL_PORT}"
+
+#        volumes:
+#            - ~/de/mssql/data:/var/opt/mssql/data
+
+        restart: on-failure
+
+        healthcheck:
+            test: [ "CMD-SHELL", "/usr/config/checkhealth.sh || exit 1" ]
+            interval: 5s
+            timeout: 3s
+            retries: 3
+
+        deploy:
+            mode: global
+
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                window: 120s
+                max_attempts: 3
+
+            resources:
+                limits:
+                    cpus: "4"
+                    memory: 4096M
+                reservations:
+                    cpus: "4"
+                    memory: 2048M
+
+
+    spark-master:
+        build:
+            context: ./docker/spark
+            dockerfile: Dockerfile
+            platforms:
+                - "linux/amd64"
+            tags:
+                - "de/spark:1.0.0"
+
+        container_name: de_spark_master
+#        entrypoint: ['./entrypoint.sh', 'master']
+
+        environment:
+            SPARK_MODE: master
+            SPARK_MASTER: spark://spark-master:7077
+            SPARK_MASTER_HOST: spark-master
+            SPARK_MASTER_PORT: 7077
+
+            SPARK_RPC_AUTHENTICATION_ENABLED: no
+            SPARK_RPC_ENCRYPTION_ENABLED: no
+            SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: no
+            SPARK_SSL_ENABLED: no
+            SPARK_USER: spark
+
+        networks:
+            - de
+
+        ports:
+#            - "${MSSQL_PORT}:${MSSQL_PORT}"
+            - "7077:7077"
+            - "8080:8080"
+
+        #        volumes:
+        #            - ~/de/mssql/data:/var/opt/mssql/data
+
+        restart: on-failure
+
+networks:
+    de:
+        driver: bridge
