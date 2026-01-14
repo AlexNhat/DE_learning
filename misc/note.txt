@@ -1,0 +1,24 @@
+https://github.com/Marcel-Jan/docker-hadoop-spark
+
+
+UI ports
+spark master: 8080
+spark datanode 1: 8081
+
+hadoop: 9870
+    history server: 8188
+    resource manager: 8088
+    node manager: 8042
+
+
+
+                                                Hadoop ecosystem
+HDFS: Namenode (master) + Datanode (slave)
+YARN: ResourceManager (master) + NodeManager (slave)
+
+Hive: SQL for distributed data
+        Hive CLI: beeline
+        ODBC/ JDBC driver
+
+Data processing: Mapreduce, Spark
+    Spark: parallelize distributed in-memory computation
