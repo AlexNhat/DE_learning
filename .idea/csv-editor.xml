@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/sandbox/duckdb/test/output/sales_warehouse_gold.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

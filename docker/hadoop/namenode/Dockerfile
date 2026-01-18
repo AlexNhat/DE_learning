@@ -10,6 +10,6 @@ RUN chmod a+x /run.sh
 
 HEALTHCHECK CMD curl -f http://localhost:9870/ || exit 1
 
-EXPOSE 9000 9870
+EXPOSE 9870 9871 9000 50100 50105
 
 CMD ["/run.sh"]

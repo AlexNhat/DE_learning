@@ -7,6 +7,9 @@ services:
                 - "linux/amd64"
             tags:
                 - "de/base-hadoop:1.0.0"
+            args:
+                - JAVA_VERSION=${JAVA_VERSION:-8}
+                - HADOOP_VERSION=${HADOOP_VERSION:-3.4.2}
 
     spark-base:
         build:
@@ -29,8 +32,11 @@ services:
         networks:
             - de
         ports:
-            - 9870:9870
-            - 9010:9000
+            - 9870:9870  # HTTP Web UI
+            - 9871:9871  # HTTPS Web UI
+            - 9000:9000  # FileSystem
+#            - 50100:50100  # Backup
+#            - 50105:50105  # Backup HTTP
         volumes:
             - hadoop_namenode:/hadoop/dfs/name
         environment:
@@ -53,7 +59,8 @@ services:
         networks:
             - de
         ports:
-            - "9864:9864"
+            - 9864:9864  # HTTP Web UI
+            - 9865:9865  # HTTPS Web UI
         volumes:
             - hadoop_datanode:/hadoop/dfs/data
         environment:
@@ -78,9 +85,8 @@ services:
             - de
         ports:
             # TODO: grant permission for derived pages
-            # TODO: inspect ui v2
-            # TODO: check IPC port 8031, 8032
-            - "8088:8088"
+            - 8088:8088  # HTTP Web UI
+            - 8090:8090  # HTTPS Web UI
         environment:
             SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864"
         env_file:
@@ -101,7 +107,8 @@ services:
         networks:
             - de
         ports:
-            - "8042:8042"
+            - 8042:8042  # HTTP Web UI
+            - 8044:8044  # HTTPS Web UI
         environment:
             SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
         env_file:
@@ -122,8 +129,8 @@ services:
         networks:
             - de
         ports:
-            - "10200:10200" # Hadoop IPC port
-            - "8188:8188"
+            - 8188:8188  # HTTP Web UI
+            - 8190:8190  # HTTPS Web UI
         volumes:
             - hadoop_historyserver:/hadoop/yarn/timeline
         environment:
@@ -134,186 +141,186 @@ services:
             - hadoop-base
         restart: always
 
-    spark-master:
-        build:
-            context: docker/spark/master
-            dockerfile: Dockerfile
-            platforms:
-                - "linux/amd64"
-            tags:
-                - "de/spark-master:1.0.0"
-        container_name: spark-master
-        networks:
-            - de
-        ports:
-            - "8080:8080"
-            - "7077:7077"
-            # TODO: check error when run start-history-server.sh
-            - "18080:18080"
-        environment:
-            - INIT_DAEMON_STEP=setup_spark
-            - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
-            - spark-base
-        depends_on:
-            - namenode
-            - datanode
+#    spark-master:
+#        build:
+#            context: docker/spark/master
+#            dockerfile: Dockerfile
+#            platforms:
+#                - "linux/amd64"
+#            tags:
+#                - "de/spark-master:1.0.0"
+#        container_name: spark-master
+#        networks:
+#            - de
+#        ports:
+#            - "8080:8080"
+#            - "7077:7077"
+#            # TODO: check error when run start-history-server.sh
+#            - "18080:18080"
+#        environment:
+#            - INIT_DAEMON_STEP=setup_spark
+#            - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+#            - spark-base
+#        depends_on:
+#            - namenode
+#            - datanode
 
-    spark-worker-1:
-        build:
-            context: docker/spark/worker
-            dockerfile: Dockerfile
-            platforms:
-                - "linux/amd64"
-            tags:
-                - "de/spark-worker:1.0.0"
-        container_name: spark-worker-1
-        networks:
-            - de
-        ports:
-            - "8081:8081"
-        environment:
-            - "SPARK_MASTER=spark://spark-master:7077"
-            - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
-        depends_on:
-            - spark-base
-            - spark-master
+#    spark-worker-1:
+#        build:
+#            context: docker/spark/worker
+#            dockerfile: Dockerfile
+#            platforms:
+#                - "linux/amd64"
+#            tags:
+#                - "de/spark-worker:1.0.0"
+#        container_name: spark-worker-1
+#        networks:
+#            - de
+#        ports:
+#            - "8081:8081"
+#        environment:
+#            - "SPARK_MASTER=spark://spark-master:7077"
+#            - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+#        depends_on:
+#            - spark-base
+#            - spark-master
 
-    hive-server:
-        build:
-            context: docker/hive
-            dockerfile: Dockerfile
-            platforms:
-                - "linux/amd64"
-            tags:
-                - "de/hive:1.0.0"
-        container_name: hive-server
-        networks:
-            - de
-        ports:
-            - "10000:10000"
-        environment:
-            HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql//hive-metastore/metastore"
-            SERVICE_PRECONDITION: "hive-metastore:9083"
-        env_file:
-            - .env_file/hive.env
-        depends_on:
-            - namenode
-            - datanode
+#    hive-server:
+#        build:
+#            context: docker/hive
+#            dockerfile: Dockerfile
+#            platforms:
+#                - "linux/amd64"
+#            tags:
+#                - "de/hive:1.0.0"
+#        container_name: hive-server
+#        networks:
+#            - de
+#        ports:
+#            - "10000:10000"
+#        environment:
+#            HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql//hive-metastore/metastore"
+#            SERVICE_PRECONDITION: "hive-metastore:9083"
+#        env_file:
+#            - .env_file/hive.env
+#        depends_on:
+#            - namenode
+#            - datanode
 
-    hive-metastore:
-        #        image: de/base-hive:1.0.0
-        build:
-            context: docker/hive
-            dockerfile: Dockerfile
-            platforms:
-                - "linux/amd64"
-            tags:
-                - "de/hive:1.0.0"
-        container_name: hive-metastore
-        command: /opt/hive/bin/hive --service metastore
-        networks:
-            - de
-        ports:
-            - "9083:9083"
-        environment:
-            SERVICE_PRECONDITION: "namenode:9870 datanode:9864 hive-metastore-postgresql:5432"
-        env_file:
-            - .env_file/hive.env
-        depends_on:
-            - hive-server
+#    hive-metastore:
+#        #        image: de/base-hive:1.0.0
+#        build:
+#            context: docker/hive
+#            dockerfile: Dockerfile
+#            platforms:
+#                - "linux/amd64"
+#            tags:
+#                - "de/hive:1.0.0"
+#        container_name: hive-metastore
+#        command: /opt/hive/bin/hive --service metastore
+#        networks:
+#            - de
+#        ports:
+#            - "9083:9083"
+#        environment:
+#            SERVICE_PRECONDITION: "namenode:9870 datanode:9864 hive-metastore-postgresql:5432"
+#        env_file:
+#            - .env_file/hive.env
+#        depends_on:
+#            - hive-server
 
-    hive-metastore-postgresql:
-        #        image: de/base-hive:1.0.0
-        build:
-            context: docker/hive
-            dockerfile: Dockerfile
-            platforms:
-                - "linux/amd64"
-            tags:
-                - "de/hive:1.0.0"
-        container_name: hive-metastore-postgresql
-        networks:
-            - de
-        ports:
-            - "5432:5432"
-        depends_on:
-            - hive-server
+#    hive-metastore-postgresql:
+#        #        image: de/base-hive:1.0.0
+#        build:
+#            context: docker/hive
+#            dockerfile: Dockerfile
+#            platforms:
+#                - "linux/amd64"
+#            tags:
+#                - "de/hive:1.0.0"
+#        container_name: hive-metastore-postgresql
+#        networks:
+#            - de
+#        ports:
+#            - "5432:5432"
+#        depends_on:
+#            - hive-server
 
-    presto-coordinator:
-        image: shawnzhu/prestodb:0.181
-        container_name: presto-coordinator
-        networks:
-            - de
-        ports:
-            - "8089:8089"
+#    presto-coordinator:
+#        image: shawnzhu/prestodb:0.181
+#        container_name: presto-coordinator
+#        networks:
+#            - de
+#        ports:
+#            - "8089:8089"
 
-    portainer:
-        image: portainer/portainer-ce:latest
-        container_name: portainer
-        networks:
-            - de
-        ports:
-            - "8000:8000"
-            - "9443:9443" # Main UI port with SSL
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock # Connects Portainer to the Docker engine
-            - portainer_data:/data # Stores Portainer's database and configurations
-        restart: unless-stopped
+#    portainer:
+#        image: portainer/portainer-ce:latest
+#        container_name: portainer
+#        networks:
+#            - de
+#        ports:
+#            - "8000:8000"
+#            - "9443:9443" # Main UI port with SSL
+#        volumes:
+#            - /var/run/docker.sock:/var/run/docker.sock # Connects Portainer to the Docker engine
+#            - portainer_data:/data # Stores Portainer's database and configurations
+#        restart: unless-stopped
 
-    mssql:
-        build:
-            context: ./docker/mssql
-            dockerfile: Dockerfile
-            platforms:
-                - "linux/amd64"
-            tags:
-                - "de/mssql:1.0.0"
-        container_name: mssql
-        networks:
-            - de
-        ports:
-            - "${MSSQL_PORT}:${MSSQL_PORT}"
-        environment:
-            MSSQL_PORT: ${MSSQL_PORT}
-
-            MSSQL_USER_NAME: ${MSSQL_USER_NAME}
-            MSSQL_USER_PASSWORD: ${MSSQL_USER_PASSWORD}
-
-            SQLCMDPASSWORD: ${MSSQL_SA_PASSWORD}
-            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
-
-            MSSQL_PID: ${MSSQL_PID}
-            MSSQL_RELEASE_YEAR: ${MSSQL_RELEASE_YEAR}
-
-            ACCEPT_EULA: ${ACCEPT_EULA}
-            TRUST_SERVER_CERTIFICATE: ${TRUST_SERVER_CERTIFICATE}
-            ENCRYPT: ${ENCRYPT}
-
-            INIT_NORTHWIND: ${INIT_NORTHWIND-true}
-        #        volumes:
-        #            - ~/de/mssql/data:/var/opt/mssql/data
-        restart: on-failure
-        healthcheck:
-            test: [ "CMD-SHELL", "/usr/config/checkhealth.sh || exit 1" ]
-            interval: 5s
-            timeout: 3s
-            retries: 3
-        deploy:
-            mode: global
-
-            restart_policy:
-                condition: on-failure
-                delay: 5s
-                window: 120s
-                max_attempts: 3
-
-            resources:
-                limits:
-                    cpus: "4"
-                    memory: 4096M
-                reservations:
-                    cpus: "4"
-                    memory: 2048M
+#    mssql:
+#        build:
+#            context: ./docker/mssql
+#            dockerfile: Dockerfile
+#            platforms:
+#                - "linux/amd64"
+#            tags:
+#                - "de/mssql:1.0.0"
+#        container_name: mssql
+#        networks:
+#            - de
+#        ports:
+#            - "${MSSQL_PORT}:${MSSQL_PORT}"
+#        environment:
+#            MSSQL_PORT: ${MSSQL_PORT}
+#
+#            MSSQL_USER_NAME: ${MSSQL_USER_NAME}
+#            MSSQL_USER_PASSWORD: ${MSSQL_USER_PASSWORD}
+#
+#            SQLCMDPASSWORD: ${MSSQL_SA_PASSWORD}
+#            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+#
+#            MSSQL_PID: ${MSSQL_PID}
+#            MSSQL_RELEASE_YEAR: ${MSSQL_RELEASE_YEAR}
+#
+#            ACCEPT_EULA: ${ACCEPT_EULA}
+#            TRUST_SERVER_CERTIFICATE: ${TRUST_SERVER_CERTIFICATE}
+#            ENCRYPT: ${ENCRYPT}
+#
+#            INIT_NORTHWIND: ${INIT_NORTHWIND-true}
+#        #        volumes:
+#        #            - ~/de/mssql/data:/var/opt/mssql/data
+#        restart: on-failure
+#        healthcheck:
+#            test: [ "CMD-SHELL", "/usr/config/checkhealth.sh || exit 1" ]
+#            interval: 5s
+#            timeout: 3s
+#            retries: 3
+#        deploy:
+#            mode: global
+#
+#            restart_policy:
+#                condition: on-failure
+#                delay: 5s
+#                window: 120s
+#                max_attempts: 3
+#
+#            resources:
+#                limits:
+#                    cpus: "4"
+#                    memory: 4096M
+#                reservations:
+#                    cpus: "4"
+#                    memory: 2048M
 
 volumes:
     portainer_data:

@@ -5,23 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7938e10b-2f2a-44da-9aa7-8365ab78c96d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/hive/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/hive/entrypoint.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/spark/base/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/note.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/python/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/python/utils/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/data_replication.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/data_replication_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/data_replication_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/evolution_timeline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/hdfs_arch.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/map_reduce_framework.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/rack_awareness_policy.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/yarn_arch.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop/yarn_job_execution.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/misc/hadoop_usage.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/de_learning/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/DE_Learning.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DE_Learning.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/spark/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/spark/entrypoint.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/python/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/base/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop/base/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/namenode/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop/namenode/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/misc/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/misc/note.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/de_learning/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +40,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Python Script" />
         <option value="Dockerfile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -97,7 +102,7 @@
     "git-widget-placeholder": "master",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/trong/Downloads/Fast_Local/Source/Java/DE_Learning/docker-hadoop-spark/hive/base",
+    "last_opened_file_path": "/home/trong/Downloads/Fast_Local/Source/Java/DE_Learning/misc/hadoop",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -106,35 +111,48 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "configurable.group.python.group.settings",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecapSpentCounter">
-    <option name="endsOfQuotaMs" value="1768543235305" />
-    <option name="spentUsd" value="0.21817125" />
+    <option name="endsOfQuotaMs" value="1771135232162" />
+    <option name="spentUsd" value="0.0037948" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="3" />
+    <option name="suspendCountdown" value="0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/misc/hadoop" />
       <recent name="$PROJECT_DIR$/docker-hadoop-spark/hive/base" />
       <recent name="$PROJECT_DIR$/docker-hadoop-spark/spark/base" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/raw_data" />
-      <recent name="$PROJECT_DIR$/data_lake/silver" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/misc/hadoop" />
       <recent name="$PROJECT_DIR$/docker" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/" />
       <recent name="$PROJECT_DIR$/docker-hadoop-spark/hive" />
-      <recent name="$PROJECT_DIR$/docker-hadoop-spark/hive/base" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.spark-base: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.hadoop-base: Compose Deployment">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.de_learning.Main" />
+      <module name="DE_Learning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.de_learning.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DE_Learning" />
       <option name="ENV_FILES" value="" />
@@ -184,19 +202,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.hive-server: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="hive-server" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="docker-compose.yml.spark-base: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -211,27 +216,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.docker-compose.yml.hadoop-base: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.hive-server: Compose Deployment" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="Docker.docker-compose.yml.spark-base: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.hadoop-base: Compose Deployment" />
       <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yml.spark-base: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.hadoop-base: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.hive-server: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.spark-base: Compose Deployment" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.142" />
-        <option value="bundled-python-sdk-f2b7a9f6281b-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.142" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SshConsoleOptionsProvider">
     <option name="myEncoding" value="UTF-8" />
@@ -270,7 +267,15 @@
       <workItem from="1768373299001" duration="4163000" />
       <workItem from="1768377496068" duration="79000" />
       <workItem from="1768386850431" duration="15109000" />
-      <workItem from="1768402259446" duration="3681000" />
+      <workItem from="1768402259446" duration="3732000" />
+      <workItem from="1768449484203" duration="7947000" />
+      <workItem from="1768486500792" duration="4160000" />
+      <workItem from="1768562268529" duration="1073000" />
+      <workItem from="1768664897016" duration="1020000" />
+      <workItem from="1768665927823" duration="984000" />
+      <workItem from="1768667277169" duration="2274000" />
+      <workItem from="1768707831531" duration="6640000" />
+      <workItem from="1768726965800" duration="15318000" />
     </task>
     <servers />
   </component>
