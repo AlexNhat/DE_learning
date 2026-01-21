@@ -31,7 +31,10 @@ RUN apt-get update && apt-get install -y wget procps && \
 
 #Custom configuration goes here
 ADD conf/** $HIVE_HOME/conf
-COPY *.sh /usr/local/bin/
+
+COPY startup.sh /usr/local/bin/
+COPY ../entrypoint.sh /usr/local/bin/
+
 RUN chmod +x /usr/local/bin/*.sh
 
 EXPOSE 10000 10002

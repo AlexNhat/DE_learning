@@ -5,28 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7938e10b-2f2a-44da-9aa7-8365ab78c96d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/data_replication.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/data_replication_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/data_replication_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/evolution_timeline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/hdfs_arch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/map_reduce_framework.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/rack_awareness_policy.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/yarn_arch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop/yarn_job_execution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc/hadoop_usage.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/de_learning/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DE_Learning.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DE_Learning.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.bak.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/config_xml_utils.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/test/tmp.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/scripts/embed_env.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env_file/hadoop.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env_file/hadoop.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/hadoop/base/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop/base/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/hadoop/namenode/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop/namenode/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/misc/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/misc/note.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/de_learning/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/base/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/base/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/base/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/entrypoint.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/datanode/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/datanode/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/datanode/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/datanode/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/historyserver/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/historyserver/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/historyserver/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/historyserver/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/namenode/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/namenode/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/namenode/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/namenode/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/nodemanager/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/nodemanager/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/nodemanager/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/nodemanager/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/resourcemanager/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/resourcemanager/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hadoop/resourcemanager/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hadoop/resourcemanager/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/conf/beeline-log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/conf/beeline-log4j2.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/conf/hive-env.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/conf/hive-env.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/conf/hive-exec-log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/conf/hive-exec-log4j2.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/conf/hive-log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/conf/hive-log4j2.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/conf/hive-site.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/conf/hive-site.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/conf/ivysettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/conf/ivysettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/conf/llap-daemon-log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/conf/llap-daemon-log4j2.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/entrypoint.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/hive/startup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/hive/startup.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/base/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/base/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/base/bde-spark.css" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/base/bde-spark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/base/execute-step.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/base/execute-step.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/base/finish-step.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/base/finish-step.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/base/wait-for-step.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/base/wait-for-step.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/master/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/master/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/master/master.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/master/master.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/worker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spark/worker/worker.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/hadoop_ecosystem/spark/worker/worker.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +51,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="95" />
+    <option name="cachedIndexableFilesCount" value="146" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -61,6 +78,9 @@
     &quot;accountId&quot;: &quot;3efd4af0-ba48-4369-b3d8-19ce071b9504&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/docker-compose.yml" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -73,49 +93,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Docker.base/Dockerfile.executor": "Run",
-    "Docker.docker-compose.yml.hadoop-base: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.hive-server: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.spark-base: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "Docker.docker-hadoop-spark.base_builder: Compose Deployment.executor": "Run",
-    "Docker.docker-hadoop-spark.hive-base: Compose Deployment.executor": "Run",
-    "Docker.docker-hadoop-spark: Compose Deployment.executor": "Run",
-    "Docker.master/Dockerfile.executor": "Run",
-    "Docker.spark/Dockerfile.executor": "Run",
-    "Makefile Target.wordcount.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.main.executor": "Run",
-    "Python.utils.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SHELLCHECK.PATH": "/home/trong/.local/share/JetBrains/PyCharm2025.3/Shell Script/shellcheck",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/trong/Downloads/Fast_Local/Source/Java/DE_Learning/misc/hadoop",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.python.group.settings",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.base/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.hadoop-base: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.hive-server: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.spark-base: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-hadoop-spark.base_builder: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-hadoop-spark.hive-base: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-hadoop-spark: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.master/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.spark/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Makefile Target.wordcount.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;/home/trong/.local/share/JetBrains/PyCharm2025.3/Shell Script/shellcheck&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/trong/Downloads/Fast_Local/Source/Java/DE_Learning/scripts/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1771135232162" />
     <option name="spentUsd" value="0.0037948" />
@@ -125,18 +145,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/resources" />
+      <recent name="$PROJECT_DIR$/scripts/test" />
       <recent name="$PROJECT_DIR$/misc/hadoop" />
       <recent name="$PROJECT_DIR$/docker-hadoop-spark/hive/base" />
       <recent name="$PROJECT_DIR$/docker-hadoop-spark/spark/base" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/raw_data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/resources" />
       <recent name="$PROJECT_DIR$/misc/hadoop" />
       <recent name="$PROJECT_DIR$/docker" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/" />
-      <recent name="$PROJECT_DIR$/docker-hadoop-spark/hive" />
     </key>
   </component>
   <component name="RunManager" selected="Docker.docker-compose.yml.hadoop-base: Compose Deployment">
@@ -153,30 +173,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="DE_Learning" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/main/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main/python/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -186,6 +182,15 @@
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
       <deployment type="dockerfile">
         <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="base/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="docker/hadoop_ecosystem/hadoop/base/Dockerfile" />
+        </settings>
       </deployment>
       <method v="2" />
     </configuration>
@@ -202,31 +207,16 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.spark-base: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="spark-base" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="Docker.docker-compose.yml.spark-base: Compose Deployment" />
+      <item itemvalue="Docker.base/Dockerfile" />
       <item itemvalue="Docker.docker-compose.yml.hadoop-base: Compose Deployment" />
-      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.docker-compose.yml.hadoop-base: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.spark-base: Compose Deployment" />
+        <item itemvalue="Docker.base/Dockerfile" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -275,7 +265,14 @@
       <workItem from="1768665927823" duration="984000" />
       <workItem from="1768667277169" duration="2274000" />
       <workItem from="1768707831531" duration="6640000" />
-      <workItem from="1768726965800" duration="15318000" />
+      <workItem from="1768726965800" duration="22533000" />
+      <workItem from="1768821697673" duration="4008000" />
+      <workItem from="1768879142506" duration="2300000" />
+      <workItem from="1768899366147" duration="3140000" />
+      <workItem from="1768927289062" duration="8250000" />
+      <workItem from="1768983563623" duration="1231000" />
+      <workItem from="1769008660433" duration="2114000" />
+      <workItem from="1769011696956" duration="7272000" />
     </task>
     <servers />
   </component>
